@@ -92,7 +92,7 @@ class ABDiscount:
         self.is_exclusive = is_exclusive
 
     def apply(self, cart_items: List[CartItem]):
-        matched = [None, None]
+        matched = [-1, -1]
 
         for i, item in enumerate(cart_items):
             if item.product.id == self.product_a_id:
@@ -100,7 +100,7 @@ class ABDiscount:
             if item.product.id == self.product_b_id:
                 matched[1] = i
 
-        if matched[0] is not None and matched[1] is not None:
+        if matched[0] != -1 and matched[1] != -1:
             cart_items[matched[0]].apply_discount_off(self.discount_off)
             cart_items[matched[1]].apply_discount_off(self.discount_off)
 

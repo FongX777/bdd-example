@@ -15,13 +15,16 @@ Also, I want other collaborators can follow the same guide and don't break the c
 
 I decided to install `pre-commit` to make sure code in every commit is formatted correctly.
 
-Tools I've installed in `.pre-commit-config.yaml`:
+Steps:
 
-- `pre-commit-hooks` fix some editor's style
-- `mirrors-isort` sorts imports
-- `autoflake` removes unused imports and unused variables from Python code.
-- `flake8` checks Python code for style errors.
-- `mirrors-yapf` re-formats code according to PEP8.
+1. `pip install pre-commit`
+2. `touch .pre-commit-config.yaml`
+3. Add tools to `.pre-commit-config.yaml`
+    1. `pre-commit-hooks` fix some editor's style
+    2. `mirrors-isort` sorts imports
+    3. `autoflake` removes unused imports and unused variables from Python code.
+    4. `flake8` checks Python code for style errors.
+    5. `mirrors-yapf` re-formats code according to PEP8.
 
 **NOTE1**: the order of the tools is important, because they might be conflict.
 
@@ -29,6 +32,8 @@ Tools I've installed in `.pre-commit-config.yaml`:
 in `.git/hooks/pre-commit`
 
 ## Consequences
+
+N/A
 
 ## References
 
