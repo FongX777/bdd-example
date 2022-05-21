@@ -1,0 +1,728 @@
+{
+  "name": "New Document",
+  "fileHandle": null,
+  "document": {
+    "id": "doc",
+    "name": "New Document",
+    "version": 15.3,
+    "pages": {
+      "page": {
+        "id": "page",
+        "name": "Example Mapping",
+        "childIndex": 1,
+        "shapes": {
+          "a8d16d1c-e8f4-4eb2-307a-9b7981c1b0b4": {
+            "id": "a8d16d1c-e8f4-4eb2-307a-9b7981c1b0b4",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 1,
+            "point": [
+              769.78,
+              88.99
+            ],
+            "size": [
+              200,
+              200
+            ],
+            "text": " Cart\n Calculation",
+            "rotation": 0,
+            "style": {
+              "color": "yellow",
+              "size": "medium",
+              "isFilled": true,
+              "dash": "dashed",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "ec34fd7a-06c6-494b-3a18-ce6018bff1ff": {
+            "id": "ec34fd7a-06c6-494b-3a18-ce6018bff1ff",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 2,
+            "point": [
+              524.84,
+              397.43
+            ],
+            "size": [
+              200,
+              200
+            ],
+            "text": "Product , Quantity, unit price and subtotal",
+            "rotation": 0,
+            "style": {
+              "color": "blue",
+              "size": "medium",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "d480c8ef-7cba-40cf-199b-1d63747e93b8": {
+            "id": "d480c8ef-7cba-40cf-199b-1d63747e93b8",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 3,
+            "point": [
+              784.52,
+              352.02
+            ],
+            "size": [
+              200,
+              200
+            ],
+            "text": "No two cart items that are the same product",
+            "rotation": 0,
+            "style": {
+              "color": "blue",
+              "size": "medium",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "f5d49498-a09b-4507-2d77-0cdffa81df0a": {
+            "id": "f5d49498-a09b-4507-2d77-0cdffa81df0a",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 4,
+            "point": [
+              251.64,
+              350.72
+            ],
+            "size": [
+              200,
+              200
+            ],
+            "text": "Cart Item can be either Product or Discount",
+            "rotation": 0,
+            "style": {
+              "color": "blue",
+              "size": "medium",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "453dde2d-6849-4aae-2df2-6d743fe8c7b8": {
+            "id": "453dde2d-6849-4aae-2df2-6d743fe8c7b8",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 5,
+            "point": [
+              1050.12,
+              353.02
+            ],
+            "size": [
+              200,
+              200
+            ],
+            "text": " Max 5 kinds of product ",
+            "rotation": 0,
+            "style": {
+              "color": "blue",
+              "size": "medium",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "1e35d40b-5da7-4502-2f1d-214264e058ca": {
+            "id": "1e35d40b-5da7-4502-2f1d-214264e058ca",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 6,
+            "point": [
+              480.21,
+              211.99
+            ],
+            "size": [
+              200,
+              200
+            ],
+            "text": "The total of the sum of all subtotals",
+            "rotation": 0,
+            "style": {
+              "color": "blue",
+              "size": "medium",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "362692e5-5cf6-4945-1e72-326e6b63edb9": {
+            "id": "362692e5-5cf6-4945-1e72-326e6b63edb9",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 7,
+            "point": [
+              1410.76,
+              326.26
+            ],
+            "size": [
+              200,
+              248
+            ],
+            "text": "Quantity of a product cart item should not exceed the limit ",
+            "rotation": 0,
+            "style": {
+              "color": "blue",
+              "size": "medium",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "f69370b9-4906-4624-1b9b-11edc1262a32": {
+            "id": "f69370b9-4906-4624-1b9b-11edc1262a32",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 8,
+            "point": [
+              2858.28,
+              325.8
+            ],
+            "size": [
+              200,
+              248
+            ],
+            "text": "The calculated result should contains discount and ",
+            "rotation": 0,
+            "style": {
+              "color": "blue",
+              "size": "medium",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "76a763d9-2a7f-4cf2-1547-69a43f364771": {
+            "id": "76a763d9-2a7f-4cf2-1547-69a43f364771",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 9,
+            "point": [
+              517.87,
+              608.74
+            ],
+            "size": [
+              200,
+              200
+            ],
+            "text": " 10 Pencil\n+ 10 Blue Pen\n \n ⇨ $ 300\n \n ",
+            "rotation": 0,
+            "style": {
+              "color": "green",
+              "size": "small",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "start"
+            }
+          },
+          "6551acbe-c72d-42cf-2075-a153938e26e9": {
+            "id": "6551acbe-c72d-42cf-2075-a153938e26e9",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 10,
+            "point": [
+              -757.59,
+              31.25
+            ],
+            "rotation": 0,
+            "text": "Price List:\n \n| Name                          | Unit Pric        | Max Purchase |\n|------------------|------------|------------|\n| Eraser                         | 10                    | 10                    |\n| Pencil                          | 20                   | 10                    |\n| Blue Pen                     | 30                   | 10                    |\n| Ruler                           | 35                   | 10                    |\n| Notebook                    | 50                  | 5                      |\n| Pencil Sharpener      | 200                 | 2                      |\n| Computer Mouse      | 500                 | 1                      |\n| Keyboard                  | 800                 | 1                      |\n ",
+            "style": {
+              "color": "orange",
+              "size": "medium",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "start"
+            }
+          },
+          "69d0299c-d7f1-4ff0-19e0-5fde8096885f": {
+            "id": "69d0299c-d7f1-4ff0-19e0-5fde8096885f",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 11,
+            "point": [
+              1784.06,
+              344.37
+            ],
+            "size": [
+              200,
+              200
+            ],
+            "text": " Quantity\n Discount",
+            "rotation": 0,
+            "style": {
+              "color": "blue",
+              "size": "medium",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "582b07aa-2151-43a6-15fc-b4e57def0c83": {
+            "id": "582b07aa-2151-43a6-15fc-b4e57def0c83",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 12,
+            "point": [
+              2351.35,
+              342.32
+            ],
+            "size": [
+              200,
+              200
+            ],
+            "text": " Bundle\n Discount",
+            "rotation": 0,
+            "style": {
+              "color": "blue",
+              "size": "medium",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "3d82d5c8-9186-4d1f-088b-27f5bc7c0784": {
+            "id": "3d82d5c8-9186-4d1f-088b-27f5bc7c0784",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 13,
+            "point": [
+              2602.5,
+              340.07
+            ],
+            "size": [
+              200,
+              200
+            ],
+            "text": " Quantity Discount + Bundle Discount",
+            "rotation": 0,
+            "style": {
+              "color": "blue",
+              "size": "medium",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "cc4c4181-eb93-4245-0baf-f1c807b30c96": {
+            "id": "cc4c4181-eb93-4245-0baf-f1c807b30c96",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 14,
+            "point": [
+              788.61,
+              601.91
+            ],
+            "size": [
+              200,
+              200
+            ],
+            "text": " 1 Pencil\n+ 1 Pencil\n \n \n \n ⇨ FAIL",
+            "rotation": 0,
+            "style": {
+              "color": "green",
+              "size": "small",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "start"
+            }
+          },
+          "ddfe0e0f-0074-4c4d-3487-50d806d88a56": {
+            "id": "ddfe0e0f-0074-4c4d-3487-50d806d88a56",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 15,
+            "point": [
+              527.8,
+              836.5
+            ],
+            "size": [
+              200,
+              200
+            ],
+            "text": "1 keyboard\n + 1 notebook\n \n ⇨ $ 850",
+            "rotation": 0,
+            "style": {
+              "color": "green",
+              "size": "small",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "start"
+            }
+          },
+          "d8c73d48-a93a-4572-0f87-838a01826f0c": {
+            "id": "d8c73d48-a93a-4572-0f87-838a01826f0c",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 16,
+            "point": [
+              1060.27,
+              590.8
+            ],
+            "size": [
+              200,
+              248
+            ],
+            "text": " 1 Pencil, \n1 Blue Pen, \n1 Ruler, \n1 Notebook, \n1 Eraser, \n1 Mouse \n(6 items)\n \n ⇨ FAIL",
+            "rotation": 0,
+            "style": {
+              "color": "green",
+              "size": "small",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "start"
+            }
+          },
+          "b25de920-69b2-4674-0735-2434dd64e11d": {
+            "id": "b25de920-69b2-4674-0735-2434dd64e11d",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 17,
+            "point": [
+              1057.46,
+              880.97
+            ],
+            "size": [
+              200,
+              224
+            ],
+            "text": " 10 Blue Pen, \n10 Ruler, \n5 Notebook,\n10  Eraser, \n1 Mouse\n (5 items)\n \n ⇨ $1300 ",
+            "rotation": 0,
+            "style": {
+              "color": "green",
+              "size": "small",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "start"
+            }
+          },
+          "02d8b196-37b4-434e-05fe-e17373e16f86": {
+            "id": "02d8b196-37b4-434e-05fe-e17373e16f86",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 18,
+            "point": [
+              1101.05,
+              101.13
+            ],
+            "size": [
+              200,
+              248
+            ],
+            "text": "Why\n ⇨ Shipping concerns\n \n more products, more shipping cost\n \n But how about keyboard??",
+            "rotation": 0,
+            "style": {
+              "color": "red",
+              "size": "small",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "555937fd-9aa0-4739-21c2-c429a2504483": {
+            "id": "555937fd-9aa0-4739-21c2-c429a2504483",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 19,
+            "point": [
+              1404.59,
+              610.2
+            ],
+            "size": [
+              200,
+              200
+            ],
+            "text": " 11 Pencil\n \n ⇨ FAIL",
+            "rotation": 0,
+            "style": {
+              "color": "green",
+              "size": "small",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "start"
+            }
+          },
+          "5aa37ba8-b42f-472c-3f8a-26a4b6e18cc2": {
+            "id": "5aa37ba8-b42f-472c-3f8a-26a4b6e18cc2",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 20,
+            "point": [
+              1411.89,
+              847.36
+            ],
+            "size": [
+              200,
+              200
+            ],
+            "text": " 2 Mouse\n \n ⇨ FAIL",
+            "rotation": 0,
+            "style": {
+              "color": "green",
+              "size": "small",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "start"
+            }
+          },
+          "b69c4613-fd72-42a6-1825-40ee6cb88bb3": {
+            "id": "b69c4613-fd72-42a6-1825-40ee6cb88bb3",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 22,
+            "point": [
+              2059.01,
+              342.18
+            ],
+            "size": [
+              200,
+              200
+            ],
+            "text": "Round Off",
+            "rotation": 0,
+            "style": {
+              "color": "blue",
+              "size": "medium",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "698a55f7-351e-4608-209d-c03521dcc4ca": {
+            "id": "698a55f7-351e-4608-209d-c03521dcc4ca",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 21,
+            "point": [
+              1778.02,
+              596.86
+            ],
+            "size": [
+              200,
+              248
+            ],
+            "text": " \"Pencil Day\"\n2 Pencil -10%\n \n |\n \n 2 Pencil,\n 1 Blue Pen\n \n ⇨ $66 (36+30)",
+            "rotation": 0,
+            "style": {
+              "color": "green",
+              "size": "small",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "start"
+            }
+          },
+          "6a9523fe-98d8-4852-009e-778ba38d56ba": {
+            "id": "6a9523fe-98d8-4852-009e-778ba38d56ba",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 23,
+            "point": [
+              2058.55,
+              591.73
+            ],
+            "size": [
+              200,
+              272
+            ],
+            "text": "\"Back to School\": \n3 Rulers -5%\n \n |\n \n 3 Rulers,\n 1 Blue Pen\n \n ⇨ $129 (99.75+30)",
+            "rotation": 0,
+            "style": {
+              "color": "green",
+              "size": "small",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "start"
+            }
+          },
+          "4d77a618-25d6-47b7-0585-82fe0ff65e54": {
+            "id": "4d77a618-25d6-47b7-0585-82fe0ff65e54",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 24,
+            "point": [
+              1782.5,
+              851.8
+            ],
+            "size": [
+              200,
+              272
+            ],
+            "text": " \"Pencil Day\"\n 2 Pencil -10%\n \n |\n \n 3 Pencil,\n 1 Blue Pen\n \n ⇨ $86 (36+20+30)",
+            "rotation": 0,
+            "style": {
+              "color": "green",
+              "size": "small",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "start"
+            }
+          },
+          "3d81a314-4b8f-4ef9-11a7-3f2159269823": {
+            "id": "3d81a314-4b8f-4ef9-11a7-3f2159269823",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 25,
+            "point": [
+              1784.31,
+              1164.37
+            ],
+            "size": [
+              200,
+              248
+            ],
+            "text": " \"Pencil Day\"\n2 Pencil -10%\n \n |\n \n 4 Pencil,\n 1 Blue Pen\n \n ⇨ $102 (72+30)",
+            "rotation": 0,
+            "style": {
+              "color": "green",
+              "size": "small",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "start"
+            }
+          },
+          "45c8f117-c19f-4db1-18b9-4cfdca9ddc84": {
+            "id": "45c8f117-c19f-4db1-18b9-4cfdca9ddc84",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 26,
+            "point": [
+              3265.65,
+              98.41
+            ],
+            "rotation": 0,
+            "text": "Price List:\n \n| Name                          | Unit Pric        | Max Purchase |\n|------------------|------------|------------|\n| Eraser                         | 10                    | 10                    |\n| Pencil                          | 20                   | 10                    |\n| Blue Pen                     | 30                   | 10                    |\n| Ruler                           | 35                   | 10                    |\n| Notebook                    | 50                  | 5                      |\n| Pencil Sharpener      | 200                 | 2                      |\n| Computer Mouse      | 500                 | 1                      |\n| Keyboard                  | 800                 | 1                      |\n ",
+            "style": {
+              "color": "orange",
+              "size": "medium",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "start"
+            }
+          },
+          "23688a0d-080b-440f-0541-e1a4062b55c9": {
+            "id": "23688a0d-080b-440f-0541-e1a4062b55c9",
+            "type": "sticky",
+            "name": "Sticky",
+            "parentId": "page",
+            "childIndex": 27,
+            "point": [
+              2359.48,
+              599.49
+            ],
+            "size": [
+              200,
+              272
+            ],
+            "text": " \"3C Sale\":\nkeyboard+mouse -$100\n|\n \n1 Keyboard\n 1 Mouse\n \n ⇨ $1200 \n(1300-100)",
+            "rotation": 0,
+            "style": {
+              "color": "green",
+              "size": "small",
+              "isFilled": true,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "start"
+            }
+          }
+        },
+        "bindings": {}
+      }
+    },
+    "pageStates": {
+      "page": {
+        "id": "page",
+        "selectedIds": [],
+        "camera": {
+          "point": [
+            545.8,
+            -87.92
+          ],
+          "zoom": 0.5849207728733766
+        }
+      }
+    },
+    "assets": {}
+  },
+  "assets": {}
+}
