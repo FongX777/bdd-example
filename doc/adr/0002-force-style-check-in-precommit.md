@@ -34,3 +34,5 @@ in `.git/hooks/pre-commit`
 
 - [pre-commit](https://pre-commit.com/)
 - [用 pre-commit 提升程式碼品質 | My.APOLLO](https://myapollo.com.tw/zh-tw/pre-commit-the-best-friend-before-commit/)
+- [autoflake · PyPI](https://pypi.org/project/autoflake/)
+- [google/yapf: A formatter for Python files](https://github.com/google/yapf#usage)
