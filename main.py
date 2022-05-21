@@ -26,6 +26,7 @@ class CartItem:
 
     @property
     def price(self):
+        a = 1
         # rule: round off anyway
         return int(self.product.unit_price * self.amount * (1 - self.discount_off * 0.01))
 
