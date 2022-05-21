@@ -26,12 +26,14 @@ class CartItem:
 
     @property
     def price(self):
-        a = 1
         # rule: round off anyway
-        return int(self.product.unit_price * self.amount * (1 - self.discount_off * 0.01))
+        return int(self.product.unit_price * self.amount *
+                   (1 - self.discount_off * 0.01))
 
     def apply_discount_off(self, new_discount_off: int):
-        return CartItem(product=self.product, amount=self.amount, discount_off=new_discount_off)
+        return CartItem(product=self.product,
+                        amount=self.amount,
+                        discount_off=new_discount_off)
 
 
 class Cart:
@@ -58,7 +60,11 @@ class Discount(abc.ABC):
 
 
 class SinglePieceDiscount:
-    def __init__(self, product_id: int, criteria_amount: int, discount_off: int, is_exclusive=False):
+    def __init__(self,
+                 product_id: int,
+                 criteria_amount: int,
+                 discount_off: int,
+                 is_exclusive=False):
         self.discount_off = discount_off
         self.criteria_amount = criteria_amount
         self.is_exclusive = is_exclusive
@@ -67,14 +73,19 @@ class SinglePieceDiscount:
     def apply(self, cart_items: List[CartItem]):
         for i, item in enumerate(cart_items):
             if item.product.id == self.product_id:
-                cart_items[i] = cart_items[i].apply_discount_off(self.discount_off)
+                cart_items[i] = cart_items[i].apply_discount_off(
+                    self.discount_off)
                 break
 
         return cart_items
 
 
 class ABDiscount:
-    def __init__(self, product_a_id: int, product_b_id: int, discount_off: int, is_exclusive=False):
+    def __init__(self,
+                 product_a_id: int,
+                 product_b_id: int,
+                 discount_off: int,
+                 is_exclusive=False):
         self.discount_off = discount_off
         self.product_a_id = product_a_id  # product a cannot be equal to product b
         self.product_b_id = product_b_id
@@ -99,10 +110,22 @@ class ABDiscount:
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     discounts = [
-        SinglePieceDiscount(product_id=apple.id, criteria_amount=2, discount_off=15, is_exclusive=True),
-        SinglePieceDiscount(product_id=notebook.id, criteria_amount=3, discount_off=15, is_exclusive=True),
-        ABDiscount(product_a_id=keyboard.id, product_b_id=pencil.id, discount_off=10, is_exclusive=True),
-        ABDiscount(product_a_id=apple.id, product_b_id=pencil.id, discount_off=5, is_exclusive=True)
+        SinglePieceDiscount(product_id=apple.id,
+                            criteria_amount=2,
+                            discount_off=15,
+                            is_exclusive=True),
+        SinglePieceDiscount(product_id=notebook.id,
+                            criteria_amount=3,
+                            discount_off=15,
+                            is_exclusive=True),
+        ABDiscount(product_a_id=keyboard.id,
+                   product_b_id=pencil.id,
+                   discount_off=10,
+                   is_exclusive=True),
+        ABDiscount(product_a_id=apple.id,
+                   product_b_id=pencil.id,
+                   discount_off=5,
+                   is_exclusive=True)
     ]
 
     interested_items = [
