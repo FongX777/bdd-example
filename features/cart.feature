@@ -23,9 +23,14 @@ Feature: Add to cart
     When the customer adds 10 pencils to the cart
     Then the total should be 310
 
-  Scenario: Cannot buy over the the max purchase amount
+  Scenario: Cannot buy over the the max purchase quantity when adding quantity to existing items
     Given the cart has 10 erasers
     When the customer adds 1 eraser
+    Then the system should show error: "You already reach the maximum purchase quantity of eraser: 10"
+
+  Scenario: Cannot buy over the the max purchase quantity when adding new item
+    Given the cart is empty
+    When the customer adds 11 eraser
     Then the system should show error: "You already reach the maximum purchase quantity of eraser: 10"
 
   Scenario: Maximum 5 items in a cart
