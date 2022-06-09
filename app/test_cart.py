@@ -1,3 +1,4 @@
+import abc
 import unittest
 from typing import List, Optional
 
@@ -28,18 +29,57 @@ class CartItem:
         return self.product.unit_price * self.quantity
 
 
-class QuantityDiscount:
+class Discount(abc.ABC):
+    @abc.abstractmethod
+    def apply(self, cart_items: List[CartItem]) -> int:
+        pass
+
+
+class QuantityDiscount(Discount):
+    def apply(self, cart_items: List[CartItem]) -> int:
+        matched_item: Optional[CartItem] = next((it for it in cart_items if it.product.name == self.product_name), None)
+        if not matched_item:
+            return 0
+        applied_times = int(matched_item.quantity / self.quantity)
+        return int(applied_times * self.discount_percentage * self.quantity * matched_item.product.unit_price / 100)
+
     def __init__(self, name: str, product_name: str, quantity: int, discount_percentage: int):
+        if discount_percentage not in [5, 10, 15]:
+            raise ValueError(f'invalid discount percentage: {discount_percentage}')
         self.name = name
         self.product_name = product_name
         self.quantity = quantity
         self.discount_percentage = discount_percentage
 
 
+class BundleDiscount(Discount):
+    def apply(self, cart_items: List[CartItem]) -> int:
+        matched_a: Optional[CartItem] = next((it for it in cart_items if it.product.name == self.product_a_name), None)
+        matched_b: Optional[CartItem] = next((it for it in cart_items if it.product.name == self.product_b_name), None)
+
+        if not matched_a or not matched_b:
+            return 0
+
+        applied_times = min(matched_a.quantity, matched_b.quantity)
+
+        return int(applied_times * self.deduction_amount)
+
+    def __init__(self, name: str, product_a_name: str, product_b_name: str, deduction_amount: int):
+        if deduction_amount <= 0:
+            raise ValueError(f'invalid deduction amount: {deduction_amount}')
+        if product_a_name == product_b_name:
+            raise ValueError(f'product a name cannot be the same as product b name: {product_a_name}')
+
+        self.name = name
+        self.product_a_name = product_a_name
+        self.product_b_name = product_b_name
+        self.deduction_amount = deduction_amount
+
+
 class Cart:
     default_shipping_fee = 60
 
-    def __init__(self, cart_items: List[CartItem] = None, discounts: List[QuantityDiscount] = None):
+    def __init__(self, cart_items: List[CartItem] = None, discounts: List[Discount] = None):
         self.cart_items = cart_items or []
         self.discounts = discounts or []
 
@@ -56,15 +96,7 @@ class Cart:
         else:
             self.cart_items.append(item)
 
-        deduction = 0
-        for discount in self.discounts:
-            matched_item: Optional[CartItem] = next(
-                (it for it in self.cart_items if it.product.name == discount.product_name), None)
-            if not matched_item:
-                continue
-            applied_times = int(matched_item.quantity / discount.quantity)
-            deduction += int(applied_times * discount.discount_percentage * discount.quantity *
-                             matched_item.product.unit_price / 100)
+        deduction = sum(discount.apply(self.cart_items) for discount in self.discounts)
 
         total_before_shipping_fee = sum(cart_item.subtotal for cart_item in self.cart_items) - int(deduction)
         if total_before_shipping_fee > 500:
@@ -76,6 +108,8 @@ class Cart:
 
 class TestWhenAddingItemToCart(unittest.TestCase):
     def setUp(self):
+        self.product_keyboard = Product(name='Keyboard', unit_price=800, max_purchase_quantity=1)
+        self.product_mouse = Product(name='Computer Mouse', unit_price=500, max_purchase_quantity=1)
         self.product_pencil_sharpener = Product(name='Pencil Sharpener', unit_price=200, max_purchase_quantity=2)
         self.product_pencil = Product(name='Pencil', unit_price=20, max_purchase_quantity=10)
         self.product_eraser = Product(name='Eraser', unit_price=10, max_purchase_quantity=10)
@@ -119,7 +153,7 @@ class TestWhenAddingItemToCart(unittest.TestCase):
             self.product_pencil,
             CartItem(1, Product(name='Blue Pen', unit_price=30, max_purchase_quantity=10)),
             CartItem(1, Product(name='Notebook', unit_price=50, max_purchase_quantity=5)),
-            CartItem(1, Product(name='Keyboard', unit_price=800, max_purchase_quantity=1)),
+            CartItem(1, self.product_keyboard),
         ])
 
         # when
@@ -152,6 +186,24 @@ class TestWhenAddingItemToCart(unittest.TestCase):
         # then
         self.assertEqual(price, 180 + 60)
 
+    def test_bundle_discounts_should_be_applied_to_the_cart_items(self):
+        # given
+        cart = Cart(cart_items=[
+            CartItem(1, self.product_keyboard),
+        ],
+                    discounts=[
+                        BundleDiscount(name='3C Day',
+                                       product_a_name=self.product_keyboard.name,
+                                       product_b_name=self.product_mouse.name,
+                                       deduction_amount=300)
+                    ])
+
+        # when
+        price = cart.add(CartItem(1, self.product_mouse))
+
+        # then
+        self.assertEqual(price, 1000)
+
 
 class CartItemTest(unittest.TestCase):
     def test_quantity_should_not_surpass_product_maximum_purchase_qty(self):
@@ -170,4 +222,24 @@ class CartTest(unittest.TestCase):
                 CartItem(1, Product(name='Notebook', unit_price=50, max_purchase_quantity=5)),
                 CartItem(1, Product(name='Keyboard', unit_price=800, max_purchase_quantity=1)),
                 CartItem(1, Product(name='Keyboard2', unit_price=800, max_purchase_quantity=1)),
+            ])
+
+
+class TestNewDiscount(unittest.TestCase):
+    def test_should_show_error_when_adding_discount_with_invalid_discount_percentage(self):
+        with pytest.raises(ValueError):
+            Cart(discounts=[
+                QuantityDiscount(name='Pencil Day', product_name='Pencil', quantity=10, discount_percentage=0)
+            ])
+
+    def test_should_fail_when_adding_discount_with_invalid_discount_amount(self):
+        with pytest.raises(ValueError):
+            Cart(discounts=[
+                BundleDiscount(name='3C Day', product_a_name='Keyboard', product_b_name='Mouse', deduction_amount=0)
+            ])
+
+    def test_should_fail_when_two_identical_product(self):
+        with pytest.raises(ValueError):
+            Cart(discounts=[
+                BundleDiscount(name='3C Day', product_a_name='Keyboard', product_b_name='Keyboard', deduction_amount=0)
             ])

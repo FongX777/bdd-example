@@ -62,7 +62,7 @@ Feature: Add to cart
     And the total should be 165 (shipping fee included)
 
   Scenario: A+B Bundle discounts should be considered in cart total
-    Given today has a discount "3C Day" that the bundle of keyboard and computer mouse receives 30 NTD deduction
+    Given today has a discount "3C Day" that the bundle of keyboard and computer mouse receives 300 NTD deduction
     And the cart has 1 keyboard
     When the customer adds 1 computer mouse
     Then the total should be 1000 (free shipping)
