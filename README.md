@@ -21,16 +21,16 @@ So that I can decide if I want to buy it.
 
 Products:
 
-| Name             | Unit Price | Max Purchase |
-|------------------|------------|--------------|
-| Eraser           | 10         | 10           |
-| Pencil           | 20         | 10           |
-| Blue Pen         | 30         | 10           |
-| Ruler            | 35         | 10           |
-| Notebook         | 50         | 5            |
-| Pencil Sharpener | 200        | 2            |
-| Computer Mouse   | 500        | 1            |
-| Keyboard         | 800        | 1            |
+| id  | Name             | Unit Price | Max Purchase |
+|-----|------------------|------------|--------------|
+| 1   | Eraser           | 10         | 10           |
+| 2   | Pencil           | 20         | 10           |
+| 3   | Blue Pen         | 30         | 10           |
+| 4   | Ruler            | 35         | 10           |
+| 5   | Notebook         | 50         | 5            |
+| 6   | Pencil Sharpener | 200        | 2            |
+| 7   | Computer Mouse   | 500        | 1            |
+| 8   | Keyboard         | 800        | 1            |
 
 ### Acceptance Criteria:
 
@@ -58,7 +58,6 @@ There are 3 releases:
 2. Product
     1. a product has a name, a unit price, and max purchase quantity
     2. unit price cannot be 0 or negative
-    3. a product can be matched with a discount
 3. Discount
     1. a discount has a name, a discount rate, and criteria
     2. one discount can only be applied multiple times if criteria is satisfied
@@ -77,4 +76,3 @@ There are 3 releases:
     1. a discount has a discount name, a fixed discount deduction amount, and two associated products
     2. The two associated products cannot be the same product
     3. One A product and one B product can be combined to get a discount of x deduction amount
-
