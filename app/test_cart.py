@@ -29,10 +29,9 @@ class CartItem:
 
 
 class Cart:
-    shipping_fee = 60
+    default_shipping_fee = 60
 
     def __init__(self, cart_items: List[CartItem] = None):
-
         self.cart_items = cart_items or []
 
         if len(self.cart_items) > 5:
@@ -48,11 +47,17 @@ class Cart:
         else:
             self.cart_items.append(item)
 
-        return sum(cart_item.subtotal for cart_item in self.cart_items) + self.shipping_fee
+        total_before_shipping_fee = sum(cart_item.subtotal for cart_item in self.cart_items)
+        if total_before_shipping_fee > 500:
+            shipping_fee = 0
+        else:
+            shipping_fee = self.default_shipping_fee
+        return total_before_shipping_fee + shipping_fee
 
 
 class TestWhenAddingItemToCart(unittest.TestCase):
     def setUp(self):
+        self.product_pencil_sharpener = Product(name='Pencil Sharpener', unit_price=200, max_purchase_quantity=2)
         self.product_pencil = Product(name='Pencil', unit_price=20, max_purchase_quantity=10)
         self.product_eraser = Product(name='Eraser', unit_price=10, max_purchase_quantity=10)
 
@@ -104,6 +109,29 @@ class TestWhenAddingItemToCart(unittest.TestCase):
 
         # then
         self.assertTrue('cannot add Pencil Sharpener because your cart has reached the purchase limit' in str(e.value))
+
+    def test_should_free_shipping_when_cart_total_is_over_500(self):
+        # given
+        cart = Cart([CartItem(2, self.product_pencil_sharpener)])
+
+        # when
+        price = cart.add(CartItem(6, self.product_pencil))
+
+        # then
+        self.assertEqual(price, 520)
+
+    # def test_quantity_discounts_should_be_applied_to_the_cart_items(self):
+    #     # given
+    #     cart = Cart(discounts=[
+    #         QuantityDiscount(name='Pencil Day', product_name=self.product_pencil.name, quantity=10,
+    #                          discount_percentage=10)
+    #     ])
+    #
+    #     # when
+    #     price = cart.add(CartItem(, self.product_pencil))
+    #
+    #     # then
+    #     self.assertEqual(price, 140)
 
 
 class CartItemTest(unittest.TestCase):
