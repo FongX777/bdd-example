@@ -1,5 +1,5 @@
 import unittest
-from typing import List
+from typing import List, Optional
 
 import pytest
 
@@ -28,11 +28,20 @@ class CartItem:
         return self.product.unit_price * self.quantity
 
 
+class QuantityDiscount:
+    def __init__(self, name: str, product_name: str, quantity: int, discount_percentage: int):
+        self.name = name
+        self.product_name = product_name
+        self.quantity = quantity
+        self.discount_percentage = discount_percentage
+
+
 class Cart:
     default_shipping_fee = 60
 
-    def __init__(self, cart_items: List[CartItem] = None):
+    def __init__(self, cart_items: List[CartItem] = None, discounts: List[QuantityDiscount] = None):
         self.cart_items = cart_items or []
+        self.discounts = discounts or []
 
         if len(self.cart_items) > 5:
             raise ValueError('max 5 items in a cart')
@@ -47,7 +56,17 @@ class Cart:
         else:
             self.cart_items.append(item)
 
-        total_before_shipping_fee = sum(cart_item.subtotal for cart_item in self.cart_items)
+        deduction = 0
+        for discount in self.discounts:
+            matched_item: Optional[CartItem] = next(
+                (it for it in self.cart_items if it.product.name == discount.product_name), None)
+            if not matched_item:
+                continue
+            applied_times = int(matched_item.quantity / discount.quantity)
+            deduction += int(applied_times * discount.discount_percentage * discount.quantity *
+                             matched_item.product.unit_price / 100)
+
+        total_before_shipping_fee = sum(cart_item.subtotal for cart_item in self.cart_items) - int(deduction)
         if total_before_shipping_fee > 500:
             shipping_fee = 0
         else:
@@ -120,18 +139,18 @@ class TestWhenAddingItemToCart(unittest.TestCase):
         # then
         self.assertEqual(price, 520)
 
-    # def test_quantity_discounts_should_be_applied_to_the_cart_items(self):
-    #     # given
-    #     cart = Cart(discounts=[
-    #         QuantityDiscount(name='Pencil Day', product_name=self.product_pencil.name, quantity=10,
-    #                          discount_percentage=10)
-    #     ])
-    #
-    #     # when
-    #     price = cart.add(CartItem(, self.product_pencil))
-    #
-    #     # then
-    #     self.assertEqual(price, 140)
+    def test_quantity_discounts_should_be_applied_to_the_cart_items(self):
+        # given
+        cart = Cart(discounts=[
+            QuantityDiscount(
+                name='Pencil Day', product_name=self.product_pencil.name, quantity=10, discount_percentage=10)
+        ])
+
+        # when
+        price = cart.add(CartItem(10, self.product_pencil))
+
+        # then
+        self.assertEqual(price, 180 + 60)
 
 
 class CartItemTest(unittest.TestCase):
