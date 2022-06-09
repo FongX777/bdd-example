@@ -34,7 +34,7 @@ Feature: Add to cart
     Then the system should show error: "You already reach the maximum purchase quantity of eraser: 10"
 
   Scenario: Maximum 5 items in a cart
-    Given the cart has 1 eraser, 1 pencil, 1 blue pen, and 1 notebook,
+    Given the cart has 1 eraser, 1 pencil, 1 blue pen, 1 notebook, and 1 keyboard
     When the customer adds 1 pencil sharpener
     Then the system should show error: "You cannot add pencil sharpener because your cart has reached the purchase limit"
 
