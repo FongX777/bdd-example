@@ -18,7 +18,7 @@ Feature: Add to cart
       | Computer Mouse     | 500          | 1              |
       | Keyboard           | 800          | 1              |
 
-  Scenario: Cart total should be total of each item subtotal plus shipping fee 60
+  Scenario: Cart total should be the sum of each item subtotal plus shipping fee 60
     Given the cart has 5 erasers
     When the customer adds 10 pencils to the cart
     Then the total should be 310
