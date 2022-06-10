@@ -18,11 +18,11 @@ Feature: Add to cart
       | Keyboard           | 800          | 1              |
 
   Scenario: Cart total should be the sum of each item subtotal plus shipping fee 60
-    Given the cart has 5 erasers
+    Given the cart has 5 Erasers
     When the customer adds 10 pencils to the cart
-    Then the total should be 310
+    Then the total should be NTD 310
 
-  Scenario: Cannot buy over the the max purchase quantity when adding quantity to existing items
+  Scenario:t Cannot buy over the the max purchase quantity when adding quantity to existing items
     Given the cart has 10 erasers
     When the customer adds 1 eraser
     Then the system should show error: "You already reach the maximum purchase quantity of eraser: 10"

@@ -1,78 +1,84 @@
 # BDD Example
 
-## Business Rules
+This is a workshop material for writing BDD style tests to design your code.
 
-### User Story:
+- [Requirement](./REQUIREMENT.md) ([ZH](./REQUIREMENT-zh.md))
 
-As a customer,
-I want to see the price in my shopping cart,
-So that I can decide if I want to buy it.
+## Three steps
 
-### API Interface
+We will go through the following steps:
 
-- Input
-    - Product id, Quantity
-- Output
-    - Product id, name, Quantity, Subtotal
-    - Discount deduction subtotal
-    - Total price
+1. Discovery: Discover the requirements with concrete example through [example mapping](https://cucumber.io/blog/bdd/example-mapping-introduction/).
+2. Formulation: Formulate the concrete examples into a business-readable specification document through gherkin.
+3. Automation: Design and write the test cases according to the business-readable specification document.
 
-### Example Data
+### Step 1 - Discovery (Example Mapping)
 
-Products:
+We will use example mapping workshop to discover the requirements and uncover ambiguities with team members.
 
-| id  | Name             | Unit Price | Max Purchase |
-|-----|------------------|------------|--------------|
-| 1   | Eraser           | 10         | 10           |
-| 2   | Pencil           | 20         | 10           |
-| 3   | Blue Pen         | 30         | 10           |
-| 4   | Ruler            | 35         | 10           |
-| 5   | Notebook         | 50         | 5            |
-| 6   | Pencil Sharpener | 200        | 2            |
-| 7   | Computer Mouse   | 500        | 1            |
-| 8   | Keyboard         | 800        | 1            |
+After this step, we will get a bunch of concrete examples that illustrate how our system will be actually used by the users.
 
-### Acceptance Criteria:
+- Input: a user story or a feature, and some details about the user story
+- Output: a bunch of concrete examples that explain the rules of the user story, which can be regarded as the acceptance criteria of the user story.
+- Tips:
+    - Focus on exploration and discover what you don't know before the workshop
+    - A good example usually use real numbers and happens in real situations, and consists of the context and the expected result, which can be validated.
+    - Don't be strict on the format of the examples, we'll refine the wording and the format later on in Step 2. You can use a sentence or even a data table to describe examples
+    - Examples should be focused and highly related to the rule it belongs to, don't try to write an example to explain multiple rules
 
-There are 3 releases:
+The sample output is in [TODO: add a pic]
 
-1. Release 1:
-    1. no discounts
-    2. the cart only need to return the total price
-2. Release 2:
-    1. discounts
-    2. the cart needs to return subtotal of all items including discounts
-3. Release 3:
-    1. Customer can know how discounts are applied
+### Step 2 - Formulation (Gherkin)
 
----
+Formulate the concrete examples into a business-readable specification document through gherkin. to make sure all team members are on the same page.
 
-1. Cart
-    1. a cart item can be either a product or a matched discount
-    2. a cart item has a quantity and a price, and the subtotal is the quantity times the price
-    3. It's not allowed to have two cart items that are the same product (you should add the quantity instead)
-    4. a cart cannot have over 5 kinds of products
-    5. [hide] the total of the cart cannot be negative
-    6. [hide] the quantity of a product in the cart should not exceed the maximum purchase quantity of the product
-    7. [hide] the total of the cart is the sum of the subtotals of all cart items
-2. Product
-    1. a product has a name, a unit price, and max purchase quantity
-    2. unit price cannot be 0 or negative
-3. Discount
-    1. a discount has a name, a discount rate, and criteria
-    2. one discount can only be applied multiple times if criteria is satisfied
-        1. [hide] discounts are not exclusive to each other
-    3. currently, there are two kinds of discounts:
-        1. Single product quantity discount
-        2. A plus B discount
-4. Single product quantity discount with percent discount rate
-    1. a discount has a discount name, a discount rate, and an associated product
-    2. Buy x quantity get y percent off
-    3. Discount rate can only be 5, 10, 15 percent
-    4. The deduction amount should be rounded off
-    5. [hide] the criteria quantity should be above 1, but must not exceed the max purchase quantity of the
-       associated product
-5. A plus B bundle discount with fixed price discount rate
-    1. a discount has a discount name, a fixed discount deduction amount, and two associated products
-    2. The two associated products cannot be the same product
-    3. One A product and one B product can be combined to get a discount of x deduction amount
+- Input: a bunch of concrete examples
+- Output: a gherkin document (a `xxx.feature` file)
+- Tips:
+    - Be selective and don't forget your goal is to write a user-friendly and business-rich document, not an E2E script.
+    - **A rule is usually mapped to a `Scenario`**, and you can pick some key examples that reveals the intention the most to flesh out your `Given`, `When`, and `Then`.
+    - Remove redundant details in the examples and make the gherkin document more concise and readable.
+    - In the real world, you can have a tester and a dev to co-write the document, and let product owner to review the final work.
+
+The sample output is in [cart.feature](./features/cart.feature).
+
+### Step 3 - Automation
+
+The final step is automation, which we design and write the test cases according to the business-readable specification document.
+
+In this tutorial, we don't use some popular frameworks or tools like Cucumber or Jebehave. Instead, we prefer to write BDD-liked tests based on the built-in testing framework.
+
+First, you need to decide the name of your test class, instead of jumping into your SUT class name, we suggest you to use the name of your feature or the action you want to test. For example:
+
+```python
+# Bad
+class TestCart:
+    pass
+
+
+# Better
+class TestAddItemsToCart:
+    pass
+```
+
+So we have a test class `TestAddItemsToCart`, and before we write the first test method, we have to come up with a good name for the test method. Here are 3 principles:
+
+1. The test method name should be a readable sentence
+2. Strongly suggest you to use "should" keyword at first, you can change it later on ([opposing opinion](https://enterprisecraftsmanship.com/posts/you-naming-tests-wrong/))
+3. You can adhere to this template, in which `given` and `when` are actually optional
+
+Here's a template:
+
+```
+# python
+def test_xxx_should_yyy_when_zzz_given_aaa()
+
+# Java
+@Test
+public void should_xxx_when_yyy_when_given_zzz()
+
+# JS/TS
+it('should xxx when yyy when given zzz', () => {})
+```
+
+The sample code is in [test_cart.py](./app/test_cart.py).
