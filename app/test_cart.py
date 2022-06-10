@@ -80,8 +80,12 @@ class Cart:
     default_shipping_fee = 60
 
     def __init__(self, cart_items: List[CartItem] = None, discounts: List[Discount] = None):
-        self.cart_items = cart_items or []
-        self.discounts = discounts or []
+        if cart_items is None:
+            cart_items = []
+        if discounts is None:
+            discounts = []
+        self.cart_items = cart_items
+        self.discounts = discounts
 
         if len(self.cart_items) > 5:
             raise ValueError('max 5 items in a cart')

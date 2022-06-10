@@ -66,3 +66,9 @@ Feature: Add to cart
     And the cart has 1 keyboard
     When the customer adds 1 computer mouse
     Then the total should be 1000 (free shipping)
+
+  Scenario: VIP can be free of shipping fee
+    Given Sean is a VIP member
+    When the customer adds 1 computer mouse
+    Then the shipping fee is 0
+    And the total should be 500
