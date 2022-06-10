@@ -4,7 +4,6 @@ Feature: Add to cart
   I want to add products to my cart and see the current total
   So that I can proceed my purchase
 
-
   Background:
     Given a sample price list:
       | Name               | Unit Price   | Max Purchase   |
@@ -46,8 +45,8 @@ Feature: Add to cart
 
     Examples:
       | pencil_count | is_included  | total |
-      | 5            | not included | 560   |
-      | 6            | included     | 520   |
+      | 5            | included     | 560   |
+      | 6            | not included | 520   |
 
   Scenario: Quantity discounts should be considered in cart total
     Given today has a discount "Pencil Day" that 10 pencils have 10% off
