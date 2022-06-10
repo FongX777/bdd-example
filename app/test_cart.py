@@ -5,6 +5,20 @@ from typing import List, Optional
 import pytest
 
 
+class MemberService(abc.ABC):
+    @abc.abstractmethod
+    def query_is_member_vip(self) -> bool:
+        pass
+
+
+class FakeMemberService(MemberService):
+    def __init__(self, is_vip: bool = False):
+        self.is_vip = is_vip
+
+    def query_is_member_vip(self) -> bool:
+        return self.is_vip
+
+
 class Product:
     def __init__(self, name: str, unit_price: int, max_purchase_quantity: int):
         self.name = name
@@ -76,16 +90,27 @@ class BundleDiscount(Discount):
         self.deduction_amount = deduction_amount
 
 
+class MemberServiceImpl(MemberService):
+    def query_is_member_vip(self) -> bool:
+        return False
+
+
 class Cart:
     default_shipping_fee = 60
 
-    def __init__(self, cart_items: List[CartItem] = None, discounts: List[Discount] = None):
+    def __init__(self,
+                 cart_items: List[CartItem] = None,
+                 discounts: List[Discount] = None,
+                 member_service: MemberService = None):
         if cart_items is None:
             cart_items = []
         if discounts is None:
             discounts = []
+        if member_service is None:
+            member_service = MemberServiceImpl()
         self.cart_items = cart_items
         self.discounts = discounts
+        self.member_service = member_service
 
         if len(self.cart_items) > 5:
             raise ValueError('max 5 items in a cart')
@@ -103,7 +128,9 @@ class Cart:
         deduction = sum(discount.apply(self.cart_items) for discount in self.discounts)
 
         total_before_shipping_fee = sum(cart_item.subtotal for cart_item in self.cart_items) - int(deduction)
-        if total_before_shipping_fee > 500:
+        if self.member_service.query_is_member_vip():
+            shipping_fee = 0
+        elif total_before_shipping_fee > 500:
             shipping_fee = 0
         else:
             shipping_fee = self.default_shipping_fee
@@ -118,43 +145,48 @@ class TestWhenAddingItemToCart(unittest.TestCase):
         self.product_pencil = Product(name='Pencil', unit_price=20, max_purchase_quantity=10)
         self.product_eraser = Product(name='Eraser', unit_price=10, max_purchase_quantity=10)
 
+    def given_cart_has(self, cart_items=None):
+        if cart_items is None:
+            cart_items = []
+        self.cart = Cart(cart_items=cart_items, discounts=[], member_service=FakeMemberService())
+
     def test_total_should_be_the_sum_up_subtotals_of_all_items_plus_shipping_fee(self):
         # given
-        cart = Cart([CartItem(5, self.product_eraser)])
+        self.given_cart_has([CartItem(5, self.product_eraser)])
 
         # when
-        price = cart.add(CartItem(10, self.product_pencil))
+        price = self.cart.add(CartItem(10, self.product_pencil))
 
         # then
         self.assertEqual(price, 310)
 
     def test_should_show_error_when_add_to_existing_items_that_is_more_tha_the_product_max_purchase_qty(self):
         # given
-        cart = Cart([CartItem(10, self.product_eraser)])
+        self.given_cart_has([CartItem(10, self.product_eraser)])
 
         # when
         with pytest.raises(ValueError) as e:
-            cart.add(CartItem(1, self.product_eraser))
+            self.cart.add(CartItem(1, self.product_eraser))
 
         # then
         self.assertTrue('already reach the maximum purchase quantity of Eraser: 10' in str(e.value))
 
     def test_should_show_error_when_add_new_items_with_too_many_qty(self):
         # given
-        cart = Cart()
+        self.given_cart_has()
 
         # when
         with pytest.raises(ValueError) as e:
-            cart.add(CartItem(11, self.product_eraser))
+            self.cart.add(CartItem(11, self.product_eraser))
 
         # then
         self.assertTrue('already reach the maximum purchase quantity of Eraser: 10' in str(e.value))
 
     def test_should_fail_when_adding_6th_item_to_the_cart(self):
         # given
-        cart = Cart([
-            self.product_eraser,
-            self.product_pencil,
+        self.given_cart_has([
+            CartItem(1, self.product_eraser),
+            CartItem(1, self.product_pencil),
             CartItem(1, Product(name='Blue Pen', unit_price=30, max_purchase_quantity=10)),
             CartItem(1, Product(name='Notebook', unit_price=50, max_purchase_quantity=5)),
             CartItem(1, self.product_keyboard),
@@ -162,26 +194,36 @@ class TestWhenAddingItemToCart(unittest.TestCase):
 
         # when
         with pytest.raises(ValueError) as e:
-            cart.add(CartItem(1, Product(name='Pencil Sharpener', unit_price=200, max_purchase_quantity=2)))
+            self.cart.add(CartItem(1, Product(name='Pencil Sharpener', unit_price=200, max_purchase_quantity=2)))
 
         # then
         self.assertTrue('cannot add Pencil Sharpener because your cart has reached the purchase limit' in str(e.value))
 
     def test_should_free_shipping_when_cart_total_is_over_500(self):
         # given
-        cart = Cart([CartItem(2, self.product_pencil_sharpener)])
+        self.given_cart_has([CartItem(2, self.product_pencil_sharpener)])
 
         # when
-        price = cart.add(CartItem(6, self.product_pencil))
+        price = self.cart.add(CartItem(6, self.product_pencil))
 
         # then
         self.assertEqual(price, 520)
+
+    def test_should_free_shipping_given_customer_is_VIP(self):
+        # given
+        cart = Cart(member_service=FakeMemberService(is_vip=True))
+
+        # when
+        price = cart.add(CartItem(1, self.product_pencil))
+
+        # then
+        self.assertEqual(price, 20)
 
     def test_quantity_discounts_should_be_applied_to_the_cart_items(self):
         # given
         cart = Cart(discounts=[
             QuantityDiscount(
-                name='Pencil Day', product_name=self.product_pencil.name, quantity=10, discount_percentage=10)
+                name='Pencil Day', product_name=self.product_pencil.name, quantity=10, discount_percentage=10),
         ])
 
         # when
