@@ -43,41 +43,8 @@
     1. 單一的指定商品，買到數量 X 時，可以享用折扣趴數 Y
     2. 折扣趴數只能是 5%, 10%, 15%
 2. A+B 折扣：購買指定 A 商品與 B 商品時，可以享用金額減免
-    1. 單一的指定商品，買到數量 X 時，可以享用金額減免 Y
+    1. A 和 B 商品各買一個時，可以享用金額減免 Y
     2. 金額減免是固定數字
     3. A 跟 B 不能是同一個商品
 
 當購物車內的商品符合任一折扣時，就會進行打折，並回傳打折後的總金額。
-
-
----
-
-4. Cart
-    1. a cart item can be either a product or a matched discount
-    2. a cart item has a quantity and a price, and the subtotal is the quantity times the price
-    3. It's not allowed to have two cart items that are the same product (you should add the quantity instead)
-    4. a cart cannot have over 5 kinds of products
-    5. [hide] the total of the cart cannot be negative
-    6. [hide] the quantity of a product in the cart should not exceed the maximum purchase quantity of the product
-    7. [hide] the total of the cart is the sum of the subtotals of all cart items
-5. Product
-    1. a product has a name, a unit price, and max purchase quantity
-    2. unit price cannot be 0 or negative
-6. Discount
-    1. a discount has a name, a discount rate, and criteria
-    2. one discount can only be applied multiple times if criteria is satisfied
-        1. [hide] discounts are not exclusive to each other
-    3. currently, there are two kinds of discounts:
-        1. Single product quantity discount
-        2. A plus B discount
-7. Single product quantity discount with percent discount rate
-    1. a discount has a discount name, a discount rate, and an associated product
-    2. Buy x quantity get y percent off
-    3. Discount rate can only be 5, 10, 15 percent
-    4. The deduction amount should be rounded off
-    5. [hide] the criteria quantity should be above 1, but must not exceed the max purchase quantity of the
-       associated product
-8. A plus B bundle discount with fixed price discount rate
-    1. a discount has a discount name, a fixed discount deduction amount, and two associated products
-    2. The two associated products cannot be the same product
-    3. One A product and one B product can be combined to get a discount of x deduction amount

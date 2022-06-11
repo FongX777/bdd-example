@@ -182,7 +182,7 @@ class TestWhenAddingItemToCart(unittest.TestCase):
         # then
         self.assertTrue('already reach the maximum purchase quantity of Eraser: 10' in str(e.value))
 
-    def test_should_fail_when_adding_6th_item_to_the_cart(self):
+    def test_should_fail_given_cart_has_already_5_items(self):
         # given
         self.given_cart_has([
             CartItem(1, self.product_eraser),

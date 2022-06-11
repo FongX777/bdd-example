@@ -22,31 +22,31 @@ Feature: Add to cart
     When the customer adds 10 pencils to the cart
     Then the total should be NTD 310
 
-  Scenario:t Cannot buy over the the max purchase quantity when adding quantity to existing items
+  Scenario: If the product is already in the cart, the quantity should be added to the existing item
     Given the cart has 10 erasers
     When the customer adds 1 eraser
     Then the system should show error: "You already reach the maximum purchase quantity of eraser: 10"
 
-  Scenario: Cannot buy over the the max purchase quantity when adding new item
+  Scenario: The quantity of the added item should be limited to the max purchase quantity of the product
     Given the cart is empty
     When the customer adds 11 eraser
     Then the system should show error: "You already reach the maximum purchase quantity of eraser: 10"
 
   Scenario: Maximum 5 items in a cart
-    Given the cart has 1 eraser, 1 pencil, 1 blue pen, 1 notebook, and 1 keyboard
+    Given the cart already has 5 items
     When the customer adds 1 pencil sharpener
     Then the system should show error: "You cannot add pencil sharpener because your cart has reached the purchase limit"
 
   Scenario Outline: Free shipping fee when cart total is over 500
     Given the cart has 2 Pencil Sharpeners
     When the customer adds <pencil_count> pencils
-    Then the shipping fee should be <is_included>
+    Then the shipping fee should be <freed_result>
     And the total should be <total>
 
     Examples:
-      | pencil_count | is_included  | total |
-      | 5            | included     | 560   |
-      | 6            | not included | 520   |
+      | pencil_count | freed_result | total |
+      | 5            | not freed    | 560   |
+      | 6            | freed        | 520   |
 
   Scenario: Quantity discounts should be considered in cart total
     Given today has a discount "Pencil Day" that 10 pencils have 10% off
